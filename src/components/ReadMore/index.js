@@ -1,44 +1,39 @@
-// Write your code here
 import {useState} from 'react'
 
 import {
   MainContainer,
-  Content,
-  ReadHeading,
-  ReadParagraph,
-  ReactImg,
-  MoreParagraph,
+  ContentContainer,
+  Title,
+  Subtitle,
+  Image,
+  Description,
   Button,
 } from './styledComponents'
 
-const ReadMore = () => {
-  const [button, setButton] = useState(false)
+const ReadMore = props => {
+  const {reactHooksDescription} = props
+  const [isReadMore, setIsReadMore] = useState(false)
+  const description = isReadMore
+    ? reactHooksDescription
+    : reactHooksDescription.slice(0, 170)
+  const buttonText = isReadMore ? 'Read Less' : 'Read More'
 
-  const onClickButton = () => setButton(prev => !prev)
-
-  const buttonText = button ? 'Read Less' : 'Read More'
+  const onClickButton = () => setIsReadMore(prevStatus => !prevStatus)
 
   return (
     <MainContainer>
-      <Content>
-        <ReadHeading>React Hooks</ReadHeading>
-        <ReadParagraph>Hooks are a new addition to React</ReadParagraph>
-        <ReactImg
+      <ContentContainer>
+        <Title>React Hooks</Title>
+        <Subtitle>Hooks are a new addition to React</Subtitle>
+        <Image
           src="https://assets.ccbp.in/frontend/hooks/react-hooks-img.png"
           alt="react hooks"
         />
-        <MoreParagraph>
-          Hooks allow function components to have access to state and other
-          React features. Because of this, class components are generally no
-          longer needed. Although Hooks generally replace class components,
-          there are no plans to remove classes from React.Hooks allow function
-          components to have access to state and other React features. Because
-          classes from React.
-        </MoreParagraph>
+        <Description>{description}</Description>
         <Button type="button" onClick={onClickButton}>
           {buttonText}
         </Button>
-      </Content>
+      </ContentContainer>
     </MainContainer>
   )
 }
